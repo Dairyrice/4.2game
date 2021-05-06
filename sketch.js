@@ -11,7 +11,7 @@ function setup() {
   poseNet = ml5.poseNet(video, modelLoaded);
   poseNet.on('pose', gotPoses);
 
-  b = loadImage('assets/pic1.png');
+  b = loadImage('assets/insta.png');
 }
 
 
@@ -31,14 +31,14 @@ function draw() {
 image(video, 0, 0);
 
   if (pose) {
-  image(b, pose.nose.x, pose.nose.y);
-  image(b, pose.rightWrist.x, pose.rightWrist.y);
-  image(b, pose.leftWrist.x, pose.leftWrist.y);
+  image(insta, pose.nose.x, pose.nose.y);
+  image(insta, pose.rightWrist.x, pose.rightWrist.y);
+  image(insta, pose.leftWrist.x, pose.leftWrist.y);
 
   for (let i = 0; i < pose.keypoints.length; i++){
     let x = pose.keypoints[i].position.x;
     let y = pose.keypoints[i].position.y;
-    image(b, x, y);
+    image(insta, x, y);
   }
 
   // for (let i = 0; i < skeleton.length; i++){
