@@ -6,12 +6,13 @@ let bear;
 
 function setup() {
   createCanvas(640, 480);
+  bear = loadImage('assets/pic1.png');
   video = createCapture(VIDEO);
   // video.hide();
   poseNet = ml5.poseNet(video, modelLoaded);
   poseNet.on('pose', gotPoses);
 
-  bear = loadImage('assets/pic1.png');
+
 }
 
 
@@ -31,16 +32,16 @@ function draw() {
 image(video, 0, 0);
 
   if (pose) {
-  fill(255,0,0);
-  ellipse(pose.nose.x, pose.nose.y, 64);
-  fill(0,0,255);
-  ellipse(pose.rightWrist.x, pose.rightWrist.y, 64);
-  ellipse(pose.leftWrist.x, pose.leftWrist.y, 32);
+
+  image(bear, pose.nose.x, pose.nose.y, 64);
+
+  image(bear, pose.rightWrist.x, pose.rightWrist.y, 64);
+  image(bear, pose.leftWrist.x, pose.leftWrist.y, 32);
 
   for (let i = 0; i < pose.keypoints.length; i++){
     let x = pose.keypoints[i].position.x;
     let y = pose.keypoints[i].position.y;
-    fill(0,255,0);
+
     ellipse(x,y,16,16);
   }
 
