@@ -1,7 +1,7 @@
 let video;
 let poseNet;
 let pose;
-let b;
+let bear;
 
 
 function setup() {
@@ -11,7 +11,7 @@ function setup() {
   poseNet = ml5.poseNet(video, modelLoaded);
   poseNet.on('pose', gotPoses);
 
-  b = loadImage('assets/insta.png');
+  bear = loadImage('assets/pic1.png');
 }
 
 
@@ -31,24 +31,27 @@ function draw() {
 image(video, 0, 0);
 
   if (pose) {
-  image(insta, pose.nose.x, pose.nose.y);
-  image(insta, pose.rightWrist.x, pose.rightWrist.y);
-  image(insta, pose.leftWrist.x, pose.leftWrist.y);
+  fill(255,0,0);
+  ellipse(pose.nose.x, pose.nose.y, 64);
+  fill(0,0,255);
+  ellipse(pose.rightWrist.x, pose.rightWrist.y, 64);
+  ellipse(pose.leftWrist.x, pose.leftWrist.y, 32);
 
   for (let i = 0; i < pose.keypoints.length; i++){
     let x = pose.keypoints[i].position.x;
     let y = pose.keypoints[i].position.y;
-    image(insta, x, y);
+    fill(0,255,0);
+    ellipse(x,y,16,16);
   }
 
-  // for (let i = 0; i < skeleton.length; i++){
-  //
-  //   let a = skeleton[i][0];
-  //   let b = skeleton[i][1];
-  //   strokeWeight(2);
-  //   stroke(255);
-  //   line(a.position.x, a.position.y, b.position.x, b.position.y);
-  // }
+  for (let i = 0; i < skeleton.length; i++){
+
+    let a = skeleton[i][0];
+    let b = skeleton[i][1];
+    strokeWeight(2);
+    stroke(255);
+    line(a.position.x, a.position.y, b.position.x, b.position.y);
+  }
 
   }
 }
